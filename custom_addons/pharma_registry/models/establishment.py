@@ -1,4 +1,4 @@
-"""Shared building blocks for every pharma establishment model."""
+"""Blocs fonctionnels partagés par tous les modèles d'établissements pharmaceutiques."""
 
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 
 
 class PharmaEstablishmentBase(models.AbstractModel):
-    """Abstract model capturing the geographical footprint of an entity."""
+    """Modèle abstrait qui décrit l'implantation  d'un établissement."""
 
     _name = "pharma.establishment.base"
     _description = "Base établissement pharmaceutique"
@@ -66,7 +66,7 @@ class PharmaEstablishmentBase(models.AbstractModel):
 
     @api.constrains("commune_id", "department_id")
     def _check_department_coherence(self):
-        """Ensure the commune belongs to the same department as the record."""
+        """Vérifier que la commune appartient bien au département indiqué."""
 
         for record in self:
             if (
@@ -80,7 +80,7 @@ class PharmaEstablishmentBase(models.AbstractModel):
 
     @api.depends("latitude", "longitude")
     def _compute_points_geolocalisation(self):
-        """ Afficher la latitude et la longitude séparée par une virgule"""
+        """Afficher latitude et longitude séparées par une virgule."""
 
         for record in self:
             if record.latitude not in (False, None) and record.longitude not in (False, None):
@@ -89,7 +89,7 @@ class PharmaEstablishmentBase(models.AbstractModel):
                 record.points_geolocalisation = False
 
     def _inverse_points_geolocalisation(self):
-        """Allow manual edition of the comma-separated coordinates if needed."""
+        """Autoriser la saisie manuelle des coordonnées si nécessaire."""
 
         for record in self:
             value = (record.points_geolocalisation or "").strip()
@@ -115,7 +115,7 @@ class PharmaEstablishmentBase(models.AbstractModel):
         return super().create(vals)
 
     def _generate_code_prefix(self):
-        """Generate an identifier with a type-specific prefix."""
+        """Générer un identifiant en ajoutant un préfixe selon le type."""
 
         prefix_map = {
             "pharma.officine": "off",

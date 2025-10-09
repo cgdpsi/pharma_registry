@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Wholesale distributors of pharmaceutical products."""
+"""Grossistes répartiteurs de produits pharmaceutiques."""
 
 from odoo import fields, models
 
 
 class PharmaGrossiste(models.Model):
-    """Grossiste combines location info with workforce and logistics data."""
+    """Grossiste qui combine localisation, effectifs et données logistiques."""
 
     _name = "pharma.grossiste"
     _description = "Grossiste répartiteur"
@@ -19,10 +19,5 @@ class PharmaGrossiste(models.Model):
     nombre_employe_non_pharmacien = fields.Integer(string="Nombre d'employés non pharmaciens", required=True)
     nombre_agent_securite = fields.Integer(string="Nombre d'agents de sécurité", required=True)
     nombre_agent_hygiene = fields.Integer(string="Nombre d'agents d'hygiène", required=True)
-    currency_id = fields.Many2one(
-        "res.currency",
-        string="Devise",
-        default=lambda self: self.env.company.currency_id.id if self.env.company else None,
-    )
-    chiffre_affaire = fields.Monetary(string="Chiffre d'affaires", currency_field="currency_id")
+    chiffre_affaire = fields.Float(string="Chiffre d'affaires (FCFA)")
     nombre_vehicule = fields.Integer(string="Nombre de véhicules (livraison / transfert)")

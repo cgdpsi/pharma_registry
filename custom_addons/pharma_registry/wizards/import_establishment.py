@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Import wizard for each type of pharmaceutical establishment."""
+"""Assistant d'import pour chaque type d'établissement pharmaceutique."""
 
 import base64
 import csv
@@ -10,12 +10,12 @@ from odoo.exceptions import UserError
 
 try:
     from openpyxl import load_workbook  # type: ignore
-except ImportError:  # pragma: no cover - optional dependency
+except ImportError:  # pragma: no cover - dépendance optionnelle
     load_workbook = None
 
 
 class PharmaImportEstablishmentWizard(models.TransientModel):
-    """Provides a generic importer for officines, dépôts, etc."""
+    """Proposer un importeur générique pour officines, dépôts, etc."""
 
     _name = "pharma.import.establishment.wizard"
     _description = "Assistant d'import des établissements"
@@ -37,7 +37,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
     allow_update = fields.Boolean(string="Mettre à jour les fiches existantes", default=True)
 
     def action_import(self):
-        """Create or update records based on the uploaded file."""
+        """Créer ou mettre à jour des fiches à partir du fichier transmis."""
 
         self.ensure_one()
         rows = self._read_rows()
@@ -83,10 +83,10 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     # ------------------------------------------------------------------
-    # Helpers
+    # Fonctions utilitaires
     # ------------------------------------------------------------------
     def _read_rows(self):
-        """Convert the binary file into a list of dictionaries."""
+        """Convertir le fichier binaire en liste de dictionnaires."""
 
         decoded = base64.b64decode(self.file_data)
         if not self.filename:
@@ -119,7 +119,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         raise UserError(_("Format de fichier non supporté: %s" % extension))
 
     def _prepare_vals(self, row):
-        """Map raw row values to model fields, regardless of the type."""
+        """Mapper les valeurs brutes vers les champs du modèle, quel que soit le type."""
 
         base_vals = {}
         name_key = {
@@ -145,9 +145,9 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         base_vals.update(handler(row))
         return base_vals
 
-    # Specific preparation -------------------------------------------------
+    # Traitements spécifiques -------------------------------------------------
     def _prepare_officine(self, row):
-        """Extract officine-specific columns."""
+        """Extraire les colonnes propres aux officines."""
 
         return {
             "numero_telephone": self._required_value(row, "NUMERO TELEPHONE"),
@@ -170,7 +170,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     def _prepare_depot(self, row):
-        """Extract dépôt-specific columns."""
+        """Extraire les colonnes propres aux dépôts."""
 
         return {
             "numero_telephone": self._required_value(row, "NUMERO TELEPHONE"),
@@ -180,7 +180,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     def _prepare_grossiste(self, row):
-        """Extract wholesale-specific columns."""
+        """Extraire les colonnes propres aux grossistes répartiteurs."""
 
         return {
             "numero_telephone": self._required_value(row, "NUMERO TELEPHONE"),
@@ -195,7 +195,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     def _prepare_agence(self, row):
-        """Extract promotion-agency-specific columns."""
+        """Extraire les colonnes propres aux agences de promotion."""
 
         return {
             "numero_telephone": self._required_value(row, "NUMERO TELEPHONE"),
@@ -210,7 +210,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     def _prepare_fabrication(self, row):
-        """Extract manufacturing-specific columns."""
+        """Extraire les colonnes propres aux sites de fabrication."""
 
         return {
             "numero_telephone": self._required_value(row, "NUMERO TELEPHONE"),
@@ -224,7 +224,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         }
 
     def _extract_coordinates(self, row):
-        """Return a tuple (latitude, longitude) based on available columns."""
+        """Retourner un tuple (latitude, longitude) selon les colonnes disponibles."""
 
         latitude = self._to_coordinate(row.get("LATITUDE"))
         longitude = self._to_coordinate(row.get("LONGITUDE"))
@@ -235,7 +235,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
 
         return latitude, longitude
 
-    # Utility methods ------------------------------------------------------
+    # Méthodes utilitaires --------------------------------------------------
     def _find_region(self, name):
         if not name:
             return False
@@ -272,7 +272,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return commune.id
 
     def _get_value(self, row, key):
-        """Return stripped string values when present."""
+        """Retourner la valeur texte nettoyée lorsqu'elle existe."""
 
         value = row.get(key)
         if isinstance(value, str):
@@ -286,7 +286,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return value
 
     def _get_adresse(self, row):
-        """Resolve the address column name for the selected type."""
+        """Identifier la colonne d'adresse en fonction du type sélectionné."""
 
         mapping = {
             "officine": "ADRESSE  EXACTE DE L'OFFICINE",
@@ -299,7 +299,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return self._get_value(row, key)
 
     def _map_statut(self, value):
-        """Normalise textual status into selection keys."""
+        """Normaliser le statut texte pour le ramener aux clés de sélection."""
 
         if not value:
             return False
@@ -311,7 +311,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return "autre"
 
     def _map_sexe(self, value):
-        """Normalise gender-like values into the enumeration."""
+        """Normaliser les valeurs de sexe afin de correspondre à l'énumération."""
 
         if not value:
             return "na"
@@ -323,7 +323,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return "na"
 
     def _map_tranche(self, value):
-        """Convert age band descriptions into internal codes."""
+        """Convertir les tranches d'âge textuelles en codes internes."""
 
         if not value:
             return "na"
@@ -347,7 +347,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
         return "na"
 
     def _to_int(self, value):
-        """Safely cast a cell to integer when possible."""
+        """Convertir en entier de manière sûre lorsque c'est possible."""
 
         try:
             return int(float(value)) if value not in (None, "") else False
@@ -355,7 +355,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
             return False
 
     def _to_float(self, value):
-        """Safely cast a cell to float when possible."""
+        """Convertir en nombre décimal de manière sûre lorsque c'est possible."""
 
         try:
             return float(value) if value not in (None, "") else 0.0
@@ -363,7 +363,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
             return 0.0
 
     def _to_date(self, value):
-        """Parse typical date formats and return a date object."""
+        """Analyser les formats de date courants et retourner un objet date."""
 
         if not value:
             return False
@@ -377,12 +377,12 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
                     return datetime.strptime(str(value), fmt).date()
                 except ValueError:
                     continue
-        except Exception:  # pragma: no cover - fallback
+        except Exception:  # pragma: no cover - solution de repli
             return False
         raise UserError(_("Format de date inconnu: %s" % value))
 
     def _to_coordinate(self, value):
-        """Convert a value to float, returning False when empty/invalid."""
+        """Convertir une valeur en flottant, retourner False si vide ou invalide."""
 
         if value in (None, ""):
             return False
@@ -392,7 +392,7 @@ class PharmaImportEstablishmentWizard(models.TransientModel):
             return False
 
     def _parse_points(self, raw_points):
-        """Decode a "lon,lat" string into numeric coordinates."""
+        """Décoder une chaîne "lon,lat" en coordonnées numériques."""
 
         if not raw_points:
             return False, False

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Representation of pharmaceutical promotion agencies."""
+"""Représentation des agences de promotion pharmaceutique."""
 
 from odoo import fields, models
 
 
 class PharmaAgence(models.Model):
-    """Agency record including regulatory identifiers and staffing."""
+    """Fiche d'agence intégrant les identifiants réglementaires et les effectifs."""
 
     _name = "pharma.agence"
     _description = "Agence de promotion"
@@ -19,10 +19,5 @@ class PharmaAgence(models.Model):
     pharmacien_responsable = fields.Char(string="Prénom et nom du pharmacien responsable", required=True)
     nombre_employe_pharmacien = fields.Integer(string="Nombre d'employés pharmaciens", required=True)
     nombre_employe_non_pharmacien = fields.Integer(string="Nombre d'employés non pharmaciens", required=True)
-    currency_id = fields.Many2one(
-        "res.currency",
-        string="Devise",
-        default=lambda self: self.env.company.currency_id.id if self.env.company else None,
-    )
-    chiffre_affaire = fields.Monetary(string="Chiffre d'affaires", currency_field="currency_id")
+    chiffre_affaire = fields.Float(string="Chiffre d'affaires (FCFA)")
     laboratoire_represente = fields.Char(string="Nom du laboratoire représenté")

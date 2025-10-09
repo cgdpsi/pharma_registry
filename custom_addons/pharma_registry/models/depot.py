@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Model describing community drug depots."""
+"""Modèle décrivant les dépôts pharmaceutiques de proximité."""
 
 from odoo import fields, models
 
 
 class PharmaDepot(models.Model):
-    """Depot inherits the geographic mixin and adds manager metadata."""
+    """Dépôt  ajoutant les informations de gestion."""
 
     _name = "pharma.depot"
     _description = "Dépôt de médicaments"

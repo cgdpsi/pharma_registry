@@ -1,44 +1,46 @@
-# Byte-compiled / cache files
+# Fichiers compilés / caches Python
 __pycache__/
 *.py[cod]
 *.so
 
-# Virtual environments
+# Environnements virtuels
 .venv/
 venv/
 env/
 .env/
 
-# Build / distribution artifacts
+# Artefacts de build / distribution
 build/
 dist/
 *.egg-info/
 *.spec
 
-# Logs & runtime files
+# Journaux et fichiers temporaires
 *.log
 *.pid
 *.swp
 
-# Test & coverage artifacts
+# Artefacts de tests et de couverture
 .pytest_cache/
 .mypy_cache/
 .coverage
 coverage.xml
 
-# Editors & IDEs
+# Répertoires des éditeurs / IDE
 .idea/
 .vscode/
 *.iml
 
-# Node / frontend
+# Dépendances Node / front-end
 node_modules/
 
-# Odoo specific
+# Spécifique à Odoo
 odoo_filestore/
 customaddon/**/__pycache__/
 
-# macOS/Linux extras
+# Fichiers système macOS / Linux
 .DS_Store
 .AppleDouble
 Thumbs.db
+
+# Spécifique au dépôt

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Manufacturing facility information."""
+"""Informations relatives aux sites de fabrication pharmaceutique."""
 
 from odoo import fields, models
 
 
 class PharmaFabrication(models.Model):
-    """Extends the base mixin with production-specific workforce fields."""
+    """Étend le socle commun avec des champs propres à la production."""
 
     _name = "pharma.fabrication"
     _description = "Établissement de fabrication"
@@ -19,9 +19,4 @@ class PharmaFabrication(models.Model):
     nombre_employe_non_pharmacien = fields.Integer(string="Nombre d'employés non pharmaciens", required=True)
     nombre_agent_securite = fields.Integer(string="Nombre d'agents de sécurité", required=True)
     nombre_agent_hygiene = fields.Integer(string="Nombre d'agents d'hygiène", required=True)
-    currency_id = fields.Many2one(
-        "res.currency",
-        string="Devise",
-        default=lambda self: self.env.company.currency_id.id if self.env.company else None,
-    )
-    chiffre_affaire = fields.Monetary(string="Chiffre d'affaires", currency_field="currency_id")
+    chiffre_affaire = fields.Float(string="Chiffre d'affaires (FCFA)")

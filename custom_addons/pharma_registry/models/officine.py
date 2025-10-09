@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Model storing the detailed profile of community pharmacies (officines)."""
+"""Modèle qui stocke le profil détaillé des pharmacies de ville (officines)."""
 
 from odoo import fields, models
 
 
 class PharmaOfficine(models.Model):
-    """Pharmacy record enriched with workforce & business indicators."""
+    """Fiche d'officine et ses différents informations."""
 
     _name = "pharma.officine"
     _description = "Officine"
@@ -45,10 +45,5 @@ class PharmaOfficine(models.Model):
     nombre_employe_non_pharmacien = fields.Integer(string="Nombre d'employés non pharmaciens")
     nombre_agent_securite = fields.Integer(string="Nombre d'agents de sécurité")
     nombre_agent_hygiene = fields.Integer(string="Nombre d'agents d'hygiène")
-    currency_id = fields.Many2one(
-        "res.currency",
-        string="Devise",
-        default=lambda self: self.env.company.currency_id.id if self.env.company else None,
-    )
-    chiffre_affaire = fields.Monetary(string="Chiffre d'affaires", currency_field="currency_id")
+    chiffre_affaire = fields.Float(string="Chiffre d'affaires (FCFA)")
     nombre_vehicule = fields.Integer(string="Nombre de véhicules (livraison / transfert)")

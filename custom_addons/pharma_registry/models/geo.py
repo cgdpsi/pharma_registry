@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Hierarchical geographic reference data (region ➔ department ➔ commune)."""
+"""Référentiel géographique hiérarchique (région ➔ département ➔ commune)."""
 
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 
 
 class PharmaGeoRegion(models.Model):
-    """Top-level administrative area used by every establishment."""
+    """Niveau administratif supérieur utilisé par chaque établissement."""
 
     _name = "pharma.geo.region"
     _description = "Région sanitaire"
@@ -21,7 +21,7 @@ class PharmaGeoRegion(models.Model):
 
 
 class PharmaGeoDepartment(models.Model):
-    """Intermediate level that belongs to a region and hosts communes."""
+    """Niveau intermédiaire rattaché à une région et regroupant des communes."""
 
     _name = "pharma.geo.department"
     _description = "Département sanitaire"
@@ -41,7 +41,7 @@ class PharmaGeoDepartment(models.Model):
 
 
 class PharmaGeoCommune(models.Model):
-    """Lowest administrative unit, tied to both a department and a region."""
+    """Plus petite entité administrative, liée à un département et à une région."""
 
     _name = "pharma.geo.commune"
     _description = "Commune sanitaire"
@@ -66,7 +66,7 @@ class PharmaGeoCommune(models.Model):
 
     @api.constrains("department_id")
     def _check_department_region(self):
-        """Validate that the department belongs to the chosen region."""
+        """Valider que le département appartient à la région sélectionnée."""
 
         for record in self:
             if record.department_id.region_id != record.region_id:
@@ -74,7 +74,7 @@ class PharmaGeoCommune(models.Model):
 
     @api.onchange("region_id")
     def _onchange_region_id(self):
-        """Reset/limit department choices when the region is changed."""
+        """Réinitialiser ou restreindre les départements lorsqu'on change de région."""
 
         if self.department_id and self.department_id.region_id != self.region_id:
             self.department_id = False
@@ -86,7 +86,7 @@ class PharmaGeoCommune(models.Model):
 
     @api.onchange("department_id")
     def _onchange_department_id(self):
-        """Automatically propagate the region from the chosen department."""
+        """Reporter automatiquement la région depuis le département choisi."""
 
         if self.department_id:
             self.region_id = self.department_id.region_id

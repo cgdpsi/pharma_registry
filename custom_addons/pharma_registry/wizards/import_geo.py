@@ -9,12 +9,12 @@ from odoo.exceptions import UserError
 
 try:
     from openpyxl import load_workbook  # type: ignore
-except ImportError:  # pragma: no cover - optional dependency
+except ImportError:  # pragma: no cover - dépendance optionnelle
     load_workbook = None
 
 
 class PharmaImportGeoWizard(models.TransientModel):
-    """Allow administrators to bulk-load regions, departments and communes."""
+    """Permettre aux administrateurs de charger en masse régions, départements et communes."""
 
     _name = "pharma.import.geo.wizard"
     _description = "Assistant d'import géographique"
@@ -23,7 +23,7 @@ class PharmaImportGeoWizard(models.TransientModel):
     filename = fields.Char(string="Nom du fichier")
 
     def action_import(self):
-        """Parse the uploaded file and create/complete the geo hierarchy."""
+        """Parcourir le fichier reçu et créer ou compléter la hiérarchie géographique."""
 
         self.ensure_one()
         rows = self._read_rows()
@@ -100,7 +100,7 @@ class PharmaImportGeoWizard(models.TransientModel):
         }
 
     def _read_rows(self):
-        """Load rows from CSV/XLSX and return normalised dictionaries."""
+        """Charger les lignes CSV/XLSX et retourner des dictionnaires normalisés."""
 
         decoded = base64.b64decode(self.file_data)
         if not self.filename:
@@ -133,10 +133,10 @@ class PharmaImportGeoWizard(models.TransientModel):
         raise UserError(_("Format de fichier non supporté: %s" % extension))
 
     # ------------------------------------------------------------------
-    # Utility helpers
+    # Fonctions utilitaires
     # ------------------------------------------------------------------
     def _normalize_row(self, row):
-        """Copy incoming row and append accent-free header variants."""
+        """Copier la ligne et ajouter des variantes d'en-têtes sans accents."""
 
         normalized = dict(row)
         for key, value in list(row.items()):
@@ -147,7 +147,7 @@ class PharmaImportGeoWizard(models.TransientModel):
 
     @staticmethod
     def _normalize_header(header):
-        """Turn a header into an uppercase ASCII identifier."""
+        """Transformer un en-tête en identifiant ASCII majuscule."""
 
         if not header:
             return ""
@@ -157,7 +157,7 @@ class PharmaImportGeoWizard(models.TransientModel):
         return normalized.upper()
 
     def _get_first_value(self, row, *keys):
-        """Fetch the first non-empty value among header aliases."""
+        """Récupérer la première valeur non vide parmi les alias d'en-tête."""
 
         for key in keys:
             if not key:
