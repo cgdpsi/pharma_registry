@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="module_category_pharma_registry" model="ir.module.category">
+            <field name="name">Gestion Pharmaceutique</field>
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_pharma_user" model="res.groups">
+            <field name="name">Utilisateur Registre</field>
+            <field name="category_id" ref="module_category_pharma_registry"/>
+        </record>
+
+        <record id="group_pharma_manager" model="res.groups">
+            <field name="name">Administrateur Registre</field>
+            <field name="category_id" ref="module_category_pharma_registry"/>
+            <field name="implied_ids" eval="[(4, ref('group_pharma_user'))]"/>
+        </record>
+    </data>
+</odoo>

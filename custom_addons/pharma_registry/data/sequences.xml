@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_pharma_establishment_default" model="ir.sequence">
+            <field name="name">Code Etablissement</field>
+            <field name="code">pharma.establishment.code</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_pharma_officine_code" model="ir.sequence">
+            <field name="name">Code Officine</field>
+            <field name="code">pharma.officine.code</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_pharma_depot_code" model="ir.sequence">
+            <field name="name">Code Depot</field>
+            <field name="code">pharma.depot.code</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_pharma_grossiste_code" model="ir.sequence">
+            <field name="name">Code Grossiste</field>
+            <field name="code">pharma.grossiste.code</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_pharma_agence_code" model="ir.sequence">
+            <field name="name">Code Agence</field>
+            <field name="code">pharma.agence.code</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_pharma_fabrication_code" model="ir.sequence">
+            <field name="name">Code Fabrication</field>
+            <field name="code">pharma.fabrication.code</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

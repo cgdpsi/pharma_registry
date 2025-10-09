@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pharma_fabrication_tree" model="ir.ui.view">
+        <field name="name">pharma.fabrication.tree</field>
+        <field name="model">pharma.fabrication</field>
+        <field name="arch" type="xml">
+            <tree string="Établissements de fabrication" decoration-muted="(not active)">
+                <!-- En-tête avec action d'import dédiée -->
+                <!-- <field name="code" string="Code"/> -->
+                <field name="name" string="Nom de l'établissement"/>
+                <field name="region_id"/>
+                <field name="department_id"/>
+                <field name="commune_id"/>
+                <field name="numero_telephone"/>
+                <field name="annee_ouverture"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pharma_fabrication_search" model="ir.ui.view">
+        <field name="name">pharma.fabrication.search</field>
+        <field name="model">pharma.fabrication</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Nom de l'établissement"/>
+                <field name="region_id"/>
+                <field name="department_id"/>
+                <field name="commune_id"/>
+                <field name="annee_ouverture"/>
+                <filter string="Actifs" name="active_true" domain="[('active', '=', True)]"/>
+                <filter string="Archivés" name="active_false" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_pharma_fabrication_form" model="ir.ui.view">
+        <field name="name">pharma.fabrication.form</field>
+        <field name="model">pharma.fabrication</field>
+        <field name="arch" type="xml">
+            <form string="Établissement de fabrication" class="pharma-officine-form">
+                <sheet class="pharma-officine-sheet">
+                    <notebook class="pharma-tabs">
+                        <page string="Profil" name="profil">
+                            <div class="pharma-form-header">
+                                <div class="pharma-title-row">
+                                    <div class="pharma-title-main">
+                                        <field name="name" placeholder="Nom de l'établissement"/>
+                                    </div>
+                                    <div class="pharma-title-photo">
+                                        <field name="photo" widget="image" class="o_field_image_small"/>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="pharma-page-header">
+                                <span class="pharma-page-title">Profil fabrication</span>
+                                <span class="pharma-page-caption">Données d'identification</span>
+                            </div>
+                            <group col="2" class="pharma-grid pharma-grid-two-cols">
+                                <group string="Contact principal" class="pharma-card">
+                                    <!-- <field name="code" readonly="1"/> -->
+                                    <field name="numero_telephone"/>
+                                    <field name="annee_ouverture"/>
+                                    <!-- <field name="active" widget="boolean_toggle" options="{'terminology': 'archive'}"/> -->
+                                </group>
+                                <group string="Localisation rapide" class="pharma-card">
+                                    <field name="region_id" options="{'no_open': True}"/>
+                                    <field name="department_id" domain="[('region_id', '=', region_id)]" options="{'no_open': True}"/>
+                                    <field name="commune_id" domain="[('department_id', '=', department_id)]" options="{'no_open': True}"/>
+                                    <field name="quartier"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Coordonnées" name="coordonnees">
+                            <div class="pharma-page-header">
+                                <span class="pharma-page-title">Adresse &amp; géolocalisationss</span>
+                                <span class="pharma-page-caption">Adresse exacte, géolocalisation</span>
+                            </div>
+                            <group col="2" class="pharma-grid pharma-grid-two-cols">
+                                <group string="Adresse complète" class="pharma-card">
+                                    <field name="adresse"/>
+                                    <field name="latitude"/>
+                                    <field name="longitude"/>
+                                    <field name="points_geolocalisation" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Équipe" name="equipe">
+                            <div class="pharma-page-header">
+                                <span class="pharma-page-title">Équipe </span>
+                                <span class="pharma-page-caption">Responsable de l'officine &amp; ressources humaines</span>
+                            </div>
+                            <group col="2" class="pharma-grid pharma-grid-two-cols">
+                                <group string="Équipe" class="pharma-card">
+                                    <field name="responsable_nom" placeholder="Responsable du site"/>
+                                    <field name="nombre_employe_pharmacien"/>
+                                    <field name="nombre_employe_non_pharmacien"/>
+                                </group>
+                                <group string="Support" class="pharma-card">
+                                    <field name="nombre_agent_securite"/>
+                                    <field name="nombre_agent_hygiene"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Indicateurs" name="indicateurs">
+                            <div class="pharma-page-header">
+                                <span class="pharma-page-title">Indicateurs financiers &amp; logistiques</span>
+                                <span class="pharma-page-caption">Suivi du chiffre d'affaires (FCFA) et remarques clés</span>
+                            </div>
+                            <group col="2" class="pharma-grid pharma-grid-two-cols">
+                                <group string="Performance" class="pharma-card">
+                                    <field name="chiffre_affaire" string="Chiffre d'affaires (FCFA)"/>
+                                </group>
+                                <group string="Observations" class="pharma-card">
+                                    <field name="observations" widget="text" placeholder="Informations complémentaires, remarques"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pharma_fabrication" model="ir.actions.act_window">
+        <field name="name">Établissements de fabrication</field>
+        <field name="res_model">pharma.fabrication</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="view_pharma_fabrication_search"/>
+    </record>
+
+    <record id="view_pharma_fabrication_kanban" model="ir.ui.view">
+        <field name="name">pharma.fabrication.kanban</field>
+        <field name="model">pharma.fabrication</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="region_id">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <div class="text-muted">
+                                    <field name="commune_id"/> · <field name="region_id"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_primary_bottom">
+                                <span t-if="record.numero_telephone.raw_value">☎️ <field name="numero_telephone"/></span>
+                                <span t-if="record.responsable_nom.raw_value">👤 <field name="responsable_nom"/></span>
+                                <span t-if="record.annee_ouverture.raw_value">🏭 <field name="annee_ouverture"/></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

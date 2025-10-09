@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pharma_region_tree" model="ir.ui.view">
+        <field name="name">pharma.geo.region.tree</field>
+        <field name="model">pharma.geo.region</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Région"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pharma_region_form" model="ir.ui.view">
+        <field name="name">pharma.geo.region.form</field>
+        <field name="model">pharma.geo.region</field>
+        <field name="arch" type="xml">
+            <form string="Région">
+                <sheet>
+                    <group>
+                        <field name="name" string="Région"/>
+                    </group>
+                    <notebook>
+                        <page string="Départements">
+                            <field name="department_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Département"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pharma_region" model="ir.actions.act_window">
+        <field name="name">Régions</field>
+        <field name="res_model">pharma.geo.region</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pharma_department_tree" model="ir.ui.view">
+        <field name="name">pharma.geo.department.tree</field>
+        <field name="model">pharma.geo.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Département"/>
+                <field name="region_id" string="Région"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pharma_department_form" model="ir.ui.view">
+        <field name="name">pharma.geo.department.form</field>
+        <field name="model">pharma.geo.department</field>
+        <field name="arch" type="xml">
+            <form string="Département">
+                <sheet>
+                    <group>
+                        <field name="name" string="Département"/>
+                        <field name="region_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Communes">
+                            <field name="commune_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Commune"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pharma_department" model="ir.actions.act_window">
+        <field name="name">Départements</field>
+        <field name="res_model">pharma.geo.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pharma_commune_tree" model="ir.ui.view">
+        <field name="name">pharma.geo.commune.tree</field>
+        <field name="model">pharma.geo.commune</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Commune"/>
+                <field name="region_id" string="Région"/>
+                <field name="department_id" string="Département" domain="[('region_id', '=', region_id)]"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pharma_commune_form" model="ir.ui.view">
+        <field name="name">pharma.geo.commune.form</field>
+        <field name="model">pharma.geo.commune</field>
+        <field name="arch" type="xml">
+            <form string="Commune">
+                <sheet>
+                    <group>
+                        <field name="name" string="Commune"/>
+                        <field name="region_id"/>
+                        <field name="department_id" domain="[('region_id', '=', region_id)]"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pharma_commune" model="ir.actions.act_window">
+        <field name="name">Communes</field>
+        <field name="res_model">pharma.geo.commune</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

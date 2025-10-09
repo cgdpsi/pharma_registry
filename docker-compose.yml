@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - odoo-db-data-v2:/var/lib/postgresql/data
+  odoo:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./custom_addons:/mnt/extra-addons
+      - odoo-filestore:/var/lib/odoo
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+      PYTHONPATH: /mnt/extra-addons
+    tty: true
+    command: ["odoo", "-c", "/etc/odoo/odoo.conf"]
+volumes:
+  odoo-db-data-v2:
+  odoo-filestore:

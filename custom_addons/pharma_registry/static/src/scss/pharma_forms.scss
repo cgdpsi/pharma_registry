@@ -1,0 +1,292 @@
+/* Personnalisation globale : couleur principale = vert */
+:root {
+  --o-brand-primary: #0f9d58;
+  --o-brand-odoo: #0f9d58;
+  --o-brand-primary-darken: #0c7a45;
+  --o-brand-primary-lighten: #2fb26b;
+}
+
+.o_main_navbar,
+.o_main_navbar .o_menu_brand {
+  background-color: var(--o-brand-odoo) !important;
+}
+
+.o_main_navbar .o_menu_sections > li > a,
+.o_main_navbar .o_menu_apps > li > a,
+.o_main_navbar .o_menu_brand {
+  color: #fff !important;
+}
+
+.o_main_navbar .dropdown-menu {
+  background-color: #ffffff !important;
+  border-color: rgba(15, 157, 88, 0.15) !important;
+}
+
+.o_main_navbar .dropdown-menu .dropdown-item {
+  color: #314155 !important;
+}
+
+.o_main_navbar .dropdown-menu .dropdown-item:hover,
+.o_main_navbar .dropdown-menu .dropdown-item:focus,
+.o_main_navbar .dropdown-menu .dropdown-item.active {
+  background-color: rgba(15, 157, 88, 0.08) !important;
+  color: var(--o-brand-odoo) !important;
+}
+
+/* Variables et palette appliquées à la fiche Officine */
+.pharma-officine-form {
+  --pharma-primary-color: #0f9d58;
+  --pharma-secondary-color: #f3f8f5;
+  --pharma-border-radius: 7px;
+}
+
+/* En-tête principal (titre + localisation) */
+.pharma-officine-form .pharma-form-header {
+  padding: 12px 18px 18px;
+  border-radius: var(--pharma-border-radius);
+  background: linear-gradient(135deg, #ffffff 0%, #f6fffb 100%);
+  border: 1px solid rgba(15, 157, 88, 0.15);
+  margin-bottom: 20px;
+  color: #0f9d58;
+}
+
+
+/* Style par défaut des onglets du notebook */
+.pharma-officine-form .nav.nav-tabs .nav-link {
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none !important;
+  padding: 10px 20px;
+  color: rgba(0, 0, 0, 0.55);
+  border-radius: 18px;
+  transition: all 0.2s ease;
+  display: inline-block;
+  position: relative;
+}
+
+/* Hover des onglets */
+.pharma-officine-form .nav.nav-tabs .nav-link:hover {
+  color: var(--pharma-primary-color);
+  background: rgba(15, 157, 88, 0.12);
+}
+
+/* Onglet actif (fond vert + typo blanche) */
+.pharma-officine-form .nav.nav-tabs .nav-link.active,
+.pharma-officine-form .nav.nav-tabs .nav-item.show .nav-link {
+  color: #fff !important;
+  background: var(--pharma-primary-color) !important;
+  background-color: var(--pharma-primary-color) !important;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(15, 157, 88, 0.2);
+  border: 1px solid var(--pharma-primary-color) !important;
+}
+
+.pharma-officine-form .pharma-tabs > ul.nav.nav-tabs {
+  border-bottom: none;
+  margin-bottom: 18px;
+  gap: 12px;
+  display: flex;
+  padding: 0 6px;
+}
+
+/* Cartes alignées en grille responsive */
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols > .o_inner_group {
+  width: 100%;
+}
+
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols > .o_inner_group .o_group_col_6,
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols > .o_inner_group .o_row {
+  width: 100%;
+}
+
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols > .o_inner_group .o_field_widget,
+.pharma-officine-form .pharma-grid.pharma-grid-two-cols > .o_inner_group .o_input {
+  border-radius: 12px;
+}
+
+.pharma-title-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.pharma-title-main {
+  flex: 1 1 auto;
+  min-width: 400px;
+}
+
+.pharma-title-photo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 96px;
+}
+
+.pharma-title-main .o_field_widget,
+.pharma-title-main .o_input {
+  width: 100%;
+}
+
+.pharma-title-photo .o_field_image {
+  max-width: 96px;
+  max-height: 96px;
+}
+
+.pharma-officine-form .o_field_widget .o_input {
+  border: 2px solid transparent !important;
+  border-bottom-color: rgba(15, 157, 88, 0.3) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 6px 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pharma-officine-form .o_field_widget .o_input:focus {
+  border-bottom-color: var(--pharma-primary-color) !important;
+  border-top-color: rgba(15, 157, 88, 0.1) !important;
+  border-left-color: rgba(15, 157, 88, 0.15) !important;
+  border-right-color: rgba(15, 157, 88, 0.15) !important;
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(15, 157, 88, 0.08);
+  outline: none;
+}
+
+/* Style des cartes (fond vert pâle + coins arrondis) */
+.pharma-officine-form .pharma-grid > .o_inner_group {
+  padding: 18px;
+  border: 1px solid rgba(15, 157, 88, 0.12);
+  border-radius: var(--pharma-border-radius);
+  background: var(--pharma-secondary-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pharma-officine-form .pharma-grid > .o_inner_group .o_form_label {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.pharma-officine-form .pharma-grid > .o_inner_group .o_row {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  align-items: center;
+  column-gap: 12px;
+}
+
+
+.pharma-officine-form .pharma-grid textarea.o_input {
+  min-height: 120px;
+}
+
+.pharma-officine-form .pharma-form-title .o_input {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--pharma-primary-color);
+  border: none;
+  background: transparent;
+  padding-left: 0;
+  min-width: 520px;
+}
+
+.pharma-officine-form .pharma-form-title .o_input:focus {
+  box-shadow: none;
+}
+
+.pharma-officine-form .pharma-form-subtitle {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 6px;
+}
+
+.pharma-officine-form .pharma-dot {
+  color: rgba(15, 157, 88, 0.5);
+}
+
+.pharma-officine-form .o_group.pharma-grid > .o_inner_group .o_row + .o_row {
+  margin-top: 8px;
+}
+
+.pharma-officine-form .o_group.pharma-grid .o_field_widget[name="observations"] textarea {
+  resize: vertical;
+}
+
+/* Bandeau d'introduction pour chaque onglet */
+.pharma-officine-form .pharma-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 6px 18px;
+  padding: 14px 18px;
+  border-radius: var(--pharma-border-radius);
+  background: rgba(15, 157, 88, 0.12);
+  border-left: 4px solid var(--pharma-primary-color);
+}
+
+.pharma-officine-form .pharma-page-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--pharma-primary-color);
+}
+
+.pharma-officine-form .pharma-page-caption {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.pharma-officine-form .o_notebook_content {
+  padding: 0 8px 16px;
+}
+:root {
+  --o-brand-primary: #0f9d58;
+  --o-brand-odoo: #0f9d58;
+  --o-brand-primary-darken: #0c7a45;
+  --o-brand-primary-lighten: #37b475;
+}
+
+/* .o_main_navbar,
+.o_main_navbar .dropdown-menu,
+.o_control_panel .o_cp_action_menus .dropdown-toggle {
+  background-color: var(--o-brand-odoo) !important;
+  border-color: var(--o-brand-odoo) !important;
+}
+
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .o_menu_sections > li > a,
+.o_main_navbar .o_menu_apps > li > a {
+  color: #fff !important;
+} */
+
+/* Boutons primaires (Nouveau, Sauvegarder, etc.) */
+.o_cp_buttons .btn.btn-primary,
+.o_form_button_save.btn-primary,
+.o_form_button_create.btn-primary,
+.o_list_button_add.btn-primary {
+    background-color: #0f9d58 !important;   /* vert principal */
+    border-color: #0c7a45 !important;
+}
+
+.o_cp_buttons .btn.btn-primary:hover,
+.o_form_button_save.btn-primary:hover,
+.o_form_button_create.btn-primary:hover,
+.o_list_button_add.btn-primary:hover {
+    background-color: #0c7a45 !important;
+    border-color: #0a6436 !important;
+}
+
+.pharma-kanban-card .o_kanban_record_top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

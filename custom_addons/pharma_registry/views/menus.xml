@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="menu_pharma_root" model="ir.ui.menu">
+            <field name="name">Registre Pharmaceutique</field>
+            <field name="sequence">5</field>
+            <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_user')), (4, ref('pharma_registry.group_pharma_manager'))]"/>
+        </record>
+
+        <record id="menu_pharma_establishments_root" model="ir.ui.menu">
+            <field name="name">Établissements</field>
+            <field name="parent_id" ref="menu_pharma_root"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="menu_pharma_officine" model="ir.ui.menu">
+            <field name="name">Officines</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_officine"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="menu_pharma_depot" model="ir.ui.menu">
+            <field name="name">Dépôts de médicaments</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_depot"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="menu_pharma_grossiste" model="ir.ui.menu">
+            <field name="name">Grossistes répartiteurs</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_grossiste"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="menu_pharma_agence" model="ir.ui.menu">
+            <field name="name">Agences de promotion</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_agence"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <record id="menu_pharma_fabrication" model="ir.ui.menu">
+            <field name="name">Établissements de fabrication</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_fabrication"/>
+            <field name="sequence">50</field>
+        </record>
+
+        <record id="menu_pharma_imports_root" model="ir.ui.menu">
+            <field name="name">Imports</field>
+            <field name="parent_id" ref="menu_pharma_establishments_root"/>
+            <field name="sequence">60</field>
+            <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+        </record>
+
+        <record id="menu_pharma_import_officine" model="ir.ui.menu">
+            <field name="name">Import officines</field>
+            <field name="parent_id" ref="menu_pharma_imports_root"/>
+            <field name="action" ref="pharma_registry.action_import_officine_bind"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="menu_pharma_import_depot" model="ir.ui.menu">
+            <field name="name">Import dépôts</field>
+            <field name="parent_id" ref="menu_pharma_imports_root"/>
+            <field name="action" ref="pharma_registry.action_import_depot_bind"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="menu_pharma_import_grossiste" model="ir.ui.menu">
+            <field name="name">Import grossistes</field>
+            <field name="parent_id" ref="menu_pharma_imports_root"/>
+            <field name="action" ref="pharma_registry.action_import_grossiste_bind"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="menu_pharma_import_agence" model="ir.ui.menu">
+            <field name="name">Import agences</field>
+            <field name="parent_id" ref="menu_pharma_imports_root"/>
+            <field name="action" ref="pharma_registry.action_import_agence_bind"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <record id="menu_pharma_import_fabrication" model="ir.ui.menu">
+            <field name="name">Import établissements de fabrication</field>
+            <field name="parent_id" ref="menu_pharma_imports_root"/>
+            <field name="action" ref="pharma_registry.action_import_fabrication_bind"/>
+            <field name="sequence">50</field>
+        </record>
+
+        <record id="menu_pharma_geo_root" model="ir.ui.menu">
+            <field name="name">Localités</field>
+            <field name="parent_id" ref="menu_pharma_root"/>
+            <field name="sequence">20</field>
+            <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+        </record>
+
+        <record id="menu_pharma_regions" model="ir.ui.menu">
+            <field name="name">Régions</field>
+            <field name="parent_id" ref="menu_pharma_geo_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_region"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="menu_pharma_departments" model="ir.ui.menu">
+            <field name="name">Départements</field>
+            <field name="parent_id" ref="menu_pharma_geo_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_department"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="menu_pharma_communes" model="ir.ui.menu">
+            <field name="name">Communes</field>
+            <field name="parent_id" ref="menu_pharma_geo_root"/>
+            <field name="action" ref="pharma_registry.action_pharma_commune"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="menu_pharma_geo_import" model="ir.ui.menu">
+            <field name="name">Import géographique</field>
+            <field name="parent_id" ref="menu_pharma_geo_root"/>
+            <field name="action" ref="pharma_registry.action_import_geo_wizard"/>
+            <field name="sequence">40</field>
+        </record>
+    </data>
+</odoo>

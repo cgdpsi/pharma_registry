@@ -1,0 +1,44 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# Build / distribution artifacts
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Logs & runtime files
+*.log
+*.pid
+*.swp
+
+# Test & coverage artifacts
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# Editors & IDEs
+.idea/
+.vscode/
+*.iml
+
+# Node / frontend
+node_modules/
+
+# Odoo specific
+odoo_filestore/
+customaddon/**/__pycache__/
+
+# macOS/Linux extras
+.DS_Store
+.AppleDouble
+Thumbs.db

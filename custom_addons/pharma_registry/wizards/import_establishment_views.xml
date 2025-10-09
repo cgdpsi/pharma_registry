@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_import_establishment_wizard" model="ir.ui.view">
+        <field name="name">pharma.import.establishment.wizard.form</field>
+        <field name="model">pharma.import.establishment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import des établissements">
+                <sheet>
+                    <group>
+                        <field name="type_etablissement"/>
+                        <field name="allow_update"/>
+                        <field name="file_data" filename="filename" string="Fichier Excel / CSV"/>
+                        <field name="filename" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_import" type="object" string="Importer" class="btn-primary"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_establishment_wizard" model="ir.actions.act_window">
+        <field name="name">Import établissements</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+
+    <record id="action_import_officine_bind" model="ir.actions.act_window">
+        <field name="name">Importer des officines</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type_etablissement': 'officine'}</field>
+        <field name="binding_model_id" ref="pharma_registry.model_pharma_officine"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+
+    <record id="action_import_depot_bind" model="ir.actions.act_window">
+        <field name="name">Importer des dépôts</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type_etablissement': 'depot'}</field>
+        <field name="binding_model_id" ref="pharma_registry.model_pharma_depot"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+
+    <record id="action_import_grossiste_bind" model="ir.actions.act_window">
+        <field name="name">Importer des grossistes</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type_etablissement': 'grossiste'}</field>
+        <field name="binding_model_id" ref="pharma_registry.model_pharma_grossiste"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+
+    <record id="action_import_agence_bind" model="ir.actions.act_window">
+        <field name="name">Importer des agences</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type_etablissement': 'agence'}</field>
+        <field name="binding_model_id" ref="pharma_registry.model_pharma_agence"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+
+    <record id="action_import_fabrication_bind" model="ir.actions.act_window">
+        <field name="name">Importer des établissements de fabrication</field>
+        <field name="res_model">pharma.import.establishment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_type_etablissement': 'fabrication'}</field>
+        <field name="binding_model_id" ref="pharma_registry.model_pharma_fabrication"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('pharma_registry.group_pharma_manager'))]"/>
+    </record>
+</odoo>
